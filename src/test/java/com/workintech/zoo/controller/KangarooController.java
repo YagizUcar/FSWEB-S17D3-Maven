@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/workintech/kangaroos")
+@RequestMapping("/kangaroos")
 public class KangarooController {
 
     private Map<Long, Kangaroo> kangaroos;

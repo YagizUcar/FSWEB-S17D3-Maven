@@ -14,9 +14,9 @@ public class ZooGlobalExceptionHandler {
     public ResponseEntity<ZooErrorResponse> handleException(ZooException exception) {
         log.error("ZooException akışı tetiklendi: {}", exception.getMessage());
         ZooErrorResponse errorResponse = new ZooErrorResponse(
-                exception.getMessage(),
-                exception.getHttpStatus().value(),
-                System.currentTimeMillis()
+                exception.getHttpStatus().value(), // Önce status (int)
+                exception.getMessage(),            // Sonra message (String)
+                System.currentTimeMillis()         // Timestamp (long)
         );
         return new ResponseEntity<>(errorResponse, exception.getHttpStatus());
     }
@@ -25,9 +25,9 @@ public class ZooGlobalExceptionHandler {
     public ResponseEntity<ZooErrorResponse> handleAllExceptions(Exception exception) {
         log.error("Beklenmeyen bir hata oluştu: {}", exception.getMessage());
         ZooErrorResponse errorResponse = new ZooErrorResponse(
-                exception.getMessage(),
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                System.currentTimeMillis()
+                HttpStatus.INTERNAL_SERVER_ERROR.value(), // Önce status (int)
+                exception.getMessage(),                   // Sonra message (String)
+                System.currentTimeMillis()                // Timestamp (long)
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
